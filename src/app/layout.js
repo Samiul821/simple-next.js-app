@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="h-screen max-h-[calc(100vh-6rem)]">{children}</main>
+        <main className="min-h-screen p-6 lg:px-[10%]">{children}</main>
         <footer className="text-center bg-slate-600">
           <p>&copy; 2025 My App</p>
         </footer>

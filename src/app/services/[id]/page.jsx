@@ -1,7 +1,6 @@
-import Link from "next/link";
 import React from "react";
 
-const ServicesPage = () => {
+const page = ({ params }) => {
   const data = [
     {
       id: "1",
@@ -53,35 +52,32 @@ const ServicesPage = () => {
     },
   ];
 
+  const id = params.id;
+
+  const service = data.find((item) => item.id === id);
+
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center">Our Services</h1>
-      <p className="mt-4 text-center">
-        We offer a variety of services to help you achieve your goals.
-      </p>
+      <h1 className="text-3xl font-bold text-center mt-6">Service Details</h1>
+      <h1 className="text-xl text-center mt-4">Service ID: {id}</h1>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.map((service) => (
-          <div
-            key={service.id}
-            className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
-          >
-            <Link href={`/services/${service.id}`}>
-              <img
-                src={service.service_image}
-                alt={service.service_name}
-                className="w-full h-48 object-cover rounded-t-lg"
-              />
-            </Link>
-            <h2 className="text-xl text-gray-900 font-semibold mt-4">
-              {service.service_name}
-            </h2>
-            <p className="mt-2 text-black">{service.service_description}</p>
-          </div>
-        ))}
-      </div>
+      {service ? (
+        <div className="mt-8">
+          <img
+            src={service.service_image}
+            alt={service.service_name}
+            className="w-full h-100 object-cover rounded-lg"
+          />
+          <h2 className="text-2xl font-semibold mt-4">
+            {service.service_name}
+          </h2>
+          <p className="mt-2 text-gray-700">{service.service_description}</p>
+        </div>
+      ) : (
+        <p className="mt-4 text-center">Service not found</p>
+      )}
     </div>
   );
 };
 
-export default ServicesPage;
+export default page;
